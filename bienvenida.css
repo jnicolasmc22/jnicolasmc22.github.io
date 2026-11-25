@@ -1,0 +1,275 @@
+/* ============================================================
+   bienvenida.css — Pantalla de bienvenida con ruta de aprendizaje
+   Enlazar en index.html DESPUÉS de estilos.css:
+   <link rel="stylesheet" href="bienvenida.css">
+   ============================================================ */
+
+#screen-welcome {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 2.5rem 1rem;
+  background: var(--bg-primary);
+}
+
+.welcome-card {
+  position: relative;
+  z-index: 10;
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Hero ─────────────────────────────────────────────── */
+.welcome-hero { text-align: center; }
+
+.welcome-badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  border: 1px solid var(--border-subtle);
+  background: rgba(0, 212, 255, 0.06);
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1.25rem;
+}
+
+.welcome-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 7vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-green));
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.welcome-lead {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+.welcome-lead strong { color: var(--accent-cyan); font-weight: 600; }
+
+/* ── Datos rápidos ────────────────────────────────────── */
+.welcome-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.stat {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius);
+  padding: 1rem 0.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.stat-num {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+}
+
+/* ── Ruta de aprendizaje ──────────────────────────────── */
+.roadmap-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: -0.75rem;
+}
+.roadmap-header h2 {
+  font-size: 1.05rem;
+  color: var(--accent-cyan);
+}
+.roadmap-header span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.roadmap {
+  list-style: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+/* línea vertical que conecta los pasos */
+.roadmap::before {
+  content: '';
+  position: absolute;
+  left: 27px;
+  top: 30px;
+  bottom: 30px;
+  width: 2px;
+  background: linear-gradient(180deg,
+    var(--mod1-accent), var(--mod2-accent), var(--mod3-accent),
+    var(--mod4-accent), var(--mod5-accent));
+  opacity: 0.55;
+}
+
+.roadmap-step {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  animation: fadeInUp 0.5s ease both;
+}
+.roadmap-step:nth-child(1) { animation-delay: 0.05s; }
+.roadmap-step:nth-child(2) { animation-delay: 0.12s; }
+.roadmap-step:nth-child(3) { animation-delay: 0.19s; }
+.roadmap-step:nth-child(4) { animation-delay: 0.26s; }
+.roadmap-step:nth-child(5) { animation-delay: 0.33s; }
+
+.step-marker {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--c);
+  background: var(--bg-primary);
+  border: 2px solid var(--c);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--c) 50%, transparent);
+  z-index: 1;
+}
+
+.step-body {
+  flex: 1;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--c);
+  border-radius: var(--border-radius);
+  padding: 0.9rem 1.15rem;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.roadmap-step:hover .step-body {
+  transform: translateX(4px);
+  border-color: var(--c);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--c) 25%, transparent);
+}
+
+.step-body h3 {
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+.step-body p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+}
+
+.step-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.step-tags span {
+  font-size: 0.78rem;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+  padding: 0.15rem 0.6rem;
+  border-radius: 20px;
+}
+
+/* ── Objetivo ─────────────────────────────────────────── */
+.objective-box {
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-lg);
+  padding: 1.25rem 1.5rem;
+}
+.objective-box h4 {
+  font-size: 0.85rem;
+  color: var(--accent-green);
+  margin-bottom: 0.75rem;
+}
+.objective-list { display: flex; flex-direction: column; gap: 0.4rem; }
+.objective-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+.objective-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.2rem;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: var(--glow-green);
+}
+
+/* ── Autores ──────────────────────────────────────────── */
+.authors-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.author-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius);
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+.author-name { font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
+.author-role { font-size: 0.8rem; color: var(--accent-purple); letter-spacing: 0.05em; }
+
+/* ── CTA ──────────────────────────────────────────────── */
+.welcome-cta { text-align: center; padding-bottom: 1rem; }
+.welcome-cta .btn { animation: glowPulse 2.2s infinite; }
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .welcome-stats { grid-template-columns: repeat(2, 1fr); }
+  .authors-grid { grid-template-columns: 1fr; }
+  .roadmap::before { left: 21px; }
+  .step-marker { width: 44px; height: 44px; font-size: 0.7rem; }
+  .roadmap-header { flex-direction: column; gap: 0.2rem; }
+}
